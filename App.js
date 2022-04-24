@@ -90,7 +90,6 @@ const App = () => {
         let myTask = realm.objectForPrimaryKey('Task', task._id);
         realm.delete(myTask);
         myTask = null;
-        realm.refresh();
       } catch (error) {
         console.log('delete', error);
       }
@@ -177,7 +176,7 @@ const App = () => {
             {tasks?.map(task => (
               <List.Item
                 key={task._id}
-                title={props => <Text style={{...props}}>{task.name}</Text>}
+                title={({selectable, rest}) => <Text style={{...rest}}>{task.name}</Text>}
                 description={task.status}
                 left={props => <List.Icon {...props} icon="folder" />}
                 right={props => (
@@ -195,6 +194,7 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
